@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Redirecting – BusServ</title>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="container" style="padding:3rem; text-align:center;">
+    <h2>Redirecting to your dashboard…</h2>
+    <p class="small">If you are not redirected automatically, <a id="manualLink" href="#">click here</a>.</p>
+  </div>
+
+  <script>
+    (function(){
+      try {
+        const userStr = localStorage.getItem('busservLoggedInUser');
+        if (!userStr) { window.location.href = 'login.html'; return; }
+        const user = JSON.parse(userStr);
+        const map = { admin: 'admin-dashboard.html', technician: 'technician-dashboard.html', driver: 'driver-dashboard.html' };
+        const role = (user.role || '').toLowerCase();
+        const dest = map[role] || 'index.html';
+        const params = new URLSearchParams(window.location.search);
+        const svc = params.get('service');
+        const target = dest + (svc ? '?service=' + encodeURIComponent(svc) : '');
+        const manual = document.getElementById('manualLink');
+        if (manual) manual.setAttribute('href', target);
+        // navigate once
+        if (!window.location.pathname.endsWith(dest)) {
+          window.location.href = target;
+        }
+      } catch (e) {
+        console.error('redirect error', e);
+        window.location.href = 'index.html';
+      }
+    })();
+  </script>
+</body>
+</html>

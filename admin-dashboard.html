@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Admin Dashboard – BusServ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BusServ</a>
+        <ul id="navLinks">
+          <li><a href="index.html#services">Services</a></li>
+          <li class="hidden" id="navDashboardWrap"><a href="admin-dashboard.html" id="navDashboard">Dashboard</a></li>
+          <li class="hidden" id="navGreetingWrap"><span id="navGreeting" class="user-greeting"></span></li>
+          <li class="hidden" id="navLogoutWrap"><a href="#" id="navLogout" class="logout-link">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-header">
+      <div class="container">
+        <p class="subline">Admin Console</p>
+        <p class="dashboard-abstract">Manage users, inventory, and system reports from here.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="adminPanel" class="role-panel">
+        <h3>Admin Dashboard</h3>
+        <div class="panel-grid">
+          <div class="panel-card"><i class="fas fa-users-cog"></i><h4>User Management</h4><p>View, edit or remove users and assign roles.</p></div>
+          <div class="panel-card"><i class="fas fa-boxes"></i><h4>Inventory & Parts</h4><p>Manage spare parts and stock levels.</p></div>
+          <div class="panel-card"><i class="fas fa-chart-line"></i><h4>Reports & Analytics</h4><p>System-wide metrics and reports.</p></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 BusServ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      function $id(id){ return document.getElementById(id); }
+      const logged = localStorage.getItem('busservLoggedInUser');
+      if (!logged) { window.location.href = 'login.html'; return; }
+      const user = JSON.parse(logged);
+      if ((user.role || '').toLowerCase() !== 'admin') {
+        // not authorized for this dashboard
+        document.body.innerHTML = '<div class="container" style="padding:3rem"><h2>Not authorized</h2><p>You do not have access to the Admin dashboard. <a href="' + (user && (user.role ? (user.role + '-dashboard.html') : 'index.html')) + '">Go to your dashboard</a></p></div>';
+        return;
+      }
+      if ($id('navGreeting')) $id('navGreeting').textContent = 'Hello, ' + ((user.fullname||user.name||'').split(' ')[0]||'Admin') + '!';
+      // attach logout
+      if ($id('navLogout')) $id('navLogout').addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('busservLoggedInUser'); location.href='index.html'; });
+    })();
+  </script>
+</body>
+</html>

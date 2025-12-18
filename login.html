@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login – BusServ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BusServ</a>
+        <ul>
+          <li><a href="login.html" class="active">Login</a></li>
+          <li><a href="register.html">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="auth-container">
+      <h1>Login to BusServ</h1>
+      <p>Access your account</p>
+
+      <form id="loginForm" class="auth-form">
+        <div class="form-group">
+          <label for="loginemail">Email Address <span class="required">*</span></label>
+          <input type="email" id="loginemail" name="email" required placeholder="you@example.com" autocomplete="email">
+          <span id="loginemailError" class="error-msg"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="loginpassword">Password <span class="required">*</span></label>
+          <div class="password-input">
+            <input type="password" id="loginpassword" name="password" required placeholder="Enter your password" autocomplete="current-password">
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('loginpassword')"></i>
+          </div>
+          <span id="loginpasswordError" class="error-msg"></span>
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="remember" name="remember">
+          <label for="remember">Remember me</label>
+          <a href="forgot-password.html" id="forgotLink" class="forgot-password">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="loginBtn">Sign In</button>
+        <div id="loginSuccess" class="success-message" style="display:none;">
+          <i class="fas fa-check-circle"></i> Login successful! Redirecting...
+        </div>
+        <div id="loginError" class="error-message" style="display:none;"></div>
+      </form>
+
+      <div class="divider">OR</div>
+
+      <button type="button" id="googleSignIn" class="btn btn-google btn-block">
+        <i class="fab fa-google"></i> Sign In with Google
+      </button>
+
+      <p class="auth-link">Don't have an account? <a href="register.html">Create one</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 BusServ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // Fallback to ensure Forgot Password opens the page
+    const forgotLink = document.getElementById('forgotLink');
+    if (forgotLink) {
+      forgotLink.addEventListener('click', function (e) {
+        // If some other script prevents default navigation, force it
+        window.location.href = 'forgot-password.html';
+      });
+    }
+  </script>
+</body>
+</html>

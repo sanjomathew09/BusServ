@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BusServ – Bus Maintenance & Service Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BusServ</a>
+        <ul id="navLinks">
+          <li><a href="#services" id="navServices">Services</a></li>
+          <li><a href="login.html" id="navLogin">Login</a></li>
+          <li><a href="register.html" id="navRegister">Register</a></li>
+
+          <!-- Hidden / shown by JS when user is logged in -->
+          <li class="hidden" id="navDashboardWrap"><a href="login.html" id="navDashboard">Dashboard</a></li>
+          <li class="hidden" id="navGreetingWrap"><span id="navGreeting" class="user-greeting"></span></li>
+          <li class="hidden" id="navLogoutWrap"><a href="#" id="navLogout" class="logout-link">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+ 
+  <section class="hero">
+    <div class="container">
+      <p class="hero-lead">Your all-in-one platform for efficient bus maintenance, service scheduling, and fleet management.</p>
+      <i class="fas fa-bus fa-4x" style="margin:2rem 0; opacity:0.9;"></i><br>
+
+      <!-- kept static, JS toggles visibility -->
+      <a href="register.html" class="btn btn-primary" id="heroRegister">Get Started Free</a>
+      <a href="login.html" class="btn btn-secondary" id="heroLogin">Login</a>
+      <a href="login.html" class="btn btn-primary hidden" id="heroDashboard">Open Dashboard</a>
+    </div>
+  </section>
+
+  <section id="services" class="services-section">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="services-lead">Comprehensive tools to keep your fleet safe, reliable, and on time.</p>
+
+      <div class="services-box">
+        <div class="services-grid">
+          <article class="service-card" data-service="maintenance">
+            <i class="fas fa-tools"></i>
+            <h4>Maintenance Tracking</h4>
+            <p>Log and track maintenance history for each vehicle to reduce downtime and costs.</p>
+          </article>
+          <article class="service-card" data-service="scheduling">
+            <i class="fas fa-calendar-alt"></i>
+            <h4>Service Scheduling</h4>
+            <p>Automate preventive maintenance based on time or mileage to avoid breakdowns.</p>
+          </article>
+          <article class="service-card" data-service="reporting">
+            <i class="fas fa-exclamation-circle"></i>
+            <h4>Fault Reporting</h4>
+            <p>Report mechanical, electrical, or body issues instantly from the field.</p>
+          </article>
+          <article class="service-card" data-service="parts">
+            <i class="fas fa-cogs"></i>
+            <h4>Spare Parts Management</h4>
+            <p>Monitor spare parts inventory and usage to streamline repairs.</p>
+          </article>
+          <article class="service-card" data-service="technicians">
+            <i class="fas fa-user-friends"></i>
+            <h4>Technician Assignment</h4>
+            <p>Assign jobs to technicians and track progress in real time.</p>
+          </article>
+          <article class="service-card" data-service="analytics">
+            <i class="fas fa-chart-line"></i>
+            <h4>Reports & Analytics</h4>
+            <p>Get actionable insights to optimize fleet performance and budget.</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dashboard section (hidden by default) -->
+  <section id="dashboardSection" class="dashboard-section hidden">
+    <div class="container">
+      <div class="dashboard-header">
+        <p class="subline">You are successfully logged in to BusServ</p>
+        <p class="dashboard-abstract">BusServ provides a centralized platform to manage bus maintenance and scheduling.</p>
+      </div>
+
+      <div class="dashboard-content">
+        <div class="dashboard-actions" style="margin-top:1.25rem; text-align:center;">
+          <a href="#" class="btn btn-primary" id="reportIssueBtn">Report Issue</a>
+          <a href="#" class="btn btn-secondary" id="scheduleServiceBtn">Schedule Service</a>
+        </div>
+
+        <div class="dashboard-features" style="margin-top:2rem;">
+          <h3>Quick Actions</h3>
+          <div class="features-grid" style="margin-top:1rem;">
+            <div class="feature-card">
+              <i class="fas fa-tools"></i>
+              <h4>Maintenance Tracking</h4>
+              <p>Track maintenance records and service history</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-calendar-alt"></i>
+              <h4>Service Scheduling</h4>
+              <p>Create preventive maintenance schedules</p>
+            </div>
+            <div class="feature-card">
+              <i class="fas fa-exclamation-circle"></i>
+              <h4>Fault Reporting</h4>
+              <p>Submit incident reports from the field</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 BusServ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

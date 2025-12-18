@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Dashboard – BusServ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BusServ</a>
+        <ul id="navLinks">
+          <li><a href="index.html#services">Services</a></li>
+          <li class="hidden" id="navDashboardWrap"><a href="user-dashboard.html" id="navDashboard">Dashboard</a></li>
+          <li class="hidden" id="navGreetingWrap"><span id="navGreeting" class="user-greeting"></span></li>
+          <li class="hidden" id="navLogoutWrap"><a href="#" id="navLogout" class="logout-link">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-header">
+      <div class="container">
+        <p class="subline">User Console</p>
+        <p class="dashboard-abstract">View your reports and request services.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="userPanel" class="role-panel">
+        <h3>User Dashboard</h3>
+        <div class="panel-grid">
+          <div class="panel-card"><i class="fas fa-file-alt"></i><h4>My Reports</h4><p>View submitted issues and status updates.</p></div>
+          <div class="panel-card"><i class="fas fa-calendar-plus"></i><h4>Request Service</h4><p>Request maintenance or schedule a service.</p></div>
+          <div class="panel-card"><i class="fas fa-bus"></i><h4>My Vehicles</h4><p>View vehicle assignments if applicable.</p></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 BusServ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      function $id(id){ return document.getElementById(id); }
+      const logged = localStorage.getItem('busservLoggedInUser');
+      if (!logged) { window.location.href = 'login.html'; return; }
+      const user = JSON.parse(logged);
+      // No user dashboard is supported. Only admin/technician/driver are allowed.
+      document.body.innerHTML = '<div class="container" style="padding:3rem"><h2>Not available</h2><p>The User profile/dashboard is not supported in this deployment. Please register or login as <strong>Admin</strong>, <strong>Driver</strong>, or <strong>Technician</strong>. <a href="index.html">Return home</a></p></div>';
+      return;
+      if ($id('navGreeting')) $id('navGreeting').textContent = 'Hello, ' + ((user.fullname||user.name||'').split(' ')[0]||'User') + '!';
+      if ($id('navLogout')) $id('navLogout').addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('busservLoggedInUser'); location.href='index.html'; });
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Driver Dashboard – BusServ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BusServ</a>
+        <ul id="navLinks">
+          <li><a href="index.html#services">Services</a></li>
+          <li class="hidden" id="navDashboardWrap"><a href="driver-dashboard.html" id="navDashboard">Dashboard</a></li>
+          <li class="hidden" id="navGreetingWrap"><span id="navGreeting" class="user-greeting"></span></li>
+          <li class="hidden" id="navLogoutWrap"><a href="#" id="navLogout" class="logout-link">Logout</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="dashboard-main">
+    <section class="dashboard-header">
+      <div class="container">
+        <p class="subline">Driver Console</p>
+        <p class="dashboard-abstract">View assignments and report issues from the field.</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="driverPanel" class="role-panel">
+        <h3>Driver Dashboard</h3>
+        <div class="panel-grid">
+          <div class="panel-card"><i class="fas fa-route"></i><h4>Assigned Routes</h4><p>View assigned buses and upcoming trips.</p></div>
+          <div class="panel-card"><i class="fas fa-exclamation-circle"></i><h4>Report an Issue</h4><p>Quickly report faults from the field.</p></div>
+          <div class="panel-card"><i class="fas fa-clock"></i><h4>Schedule</h4><p>View upcoming service/shift times.</p></div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 BusServ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function(){
+      function $id(id){ return document.getElementById(id); }
+      const logged = localStorage.getItem('busservLoggedInUser');
+      if (!logged) { window.location.href = 'login.html'; return; }
+      const user = JSON.parse(logged);
+      if ((user.role || '').toLowerCase() !== 'driver') {
+        document.body.innerHTML = '<div class="container" style="padding:3rem"><h2>Not authorized</h2><p>You do not have access to the Driver dashboard. <a href="' + (user && (user.role ? (user.role + '-dashboard.html') : 'index.html')) + '">Go to your dashboard</a></p></div>';
+        return;
+      }
+      if ($id('navGreeting')) $id('navGreeting').textContent = 'Hello, ' + ((user.fullname||user.name||'').split(' ')[0]||'Driver') + '!';
+      if ($id('navLogout')) $id('navLogout').addEventListener('click', function(e){ e.preventDefault(); localStorage.removeItem('busservLoggedInUser'); location.href='index.html'; });
+    })();
+  </script>
+</body>
+</html>

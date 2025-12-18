@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register – BusServ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">BusServ</a>
+        <ul>
+          <li><a href="login.html">Login</a></li>
+          <li><a href="register.html" class="active">Register</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="auth-section">
+    <div class="auth-container">
+      <h1>Create Your Account</h1>
+      <p>Start managing your bus fleet today</p>
+
+      <form id="registerForm" class="auth-form">
+        <div class="form-group">
+          <label for="fullname">Full Name <span class="required">*</span></label>
+          <input type="text" id="fullname" name="fullname" required placeholder="John Doe" autocomplete="name">
+          <span id="fullnameError" class="error-msg"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="regrole">Register As <span class="required">*</span></label>
+          <select id="regrole" name="role" required>
+            <option value="admin">Admin</option>
+            <option value="driver" selected>Driver</option>
+            <option value="technician">Technician</option>
+          </select>
+          <span id="regroleError" class="error-msg"></span>
+        </div>
+        
+        <div class="form-group">
+          <label for="regemail">Email Address <span class="required">*</span></label>
+          <input type="email" id="regemail" name="email" required placeholder="you@example.com" autocomplete="email">
+          <span id="regemailError" class="error-msg"></span>
+          <small class="success-msg" id="emailSuccess"></small>
+        </div>
+
+        <div class="form-group">
+          <label for="regphone">Phone Number <span class="required">*</span></label>
+          <input type="tel" id="regphone" name="phone" required placeholder="+1 (555) 000-0000" autocomplete="tel">
+          <span id="regphoneError" class="error-msg"></span>
+        </div>
+
+        <div class="form-group">
+          <label for="regpassword">Password <span class="required">*</span></label>
+          <div class="password-input">
+            <input type="password" id="regpassword" name="password" required placeholder="Min 8 characters" autocomplete="new-password">
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('regpassword')"></i>
+          </div>
+          <span id="regpasswordError" class="error-msg"></span>
+          <small class="password-strength">Password strength: <span id="strengthText">Weak</span></small>
+        </div>
+
+        <div class="form-group">
+          <label for="regconfirm">Confirm Password <span class="required">*</span></label>
+          <div class="password-input">
+            <input type="password" id="regconfirm" name="confirm" required placeholder="Re-enter your password" autocomplete="new-password">
+            <i class="fas fa-eye toggle-password" onclick="togglePassword('regconfirm')"></i>
+          </div>
+          <span id="regconfirmError" class="error-msg"></span>
+        </div>
+
+        <div class="form-group checkbox">
+          <input type="checkbox" id="terms" name="terms" required>
+          <label for="terms">I agree to the <a href="#" target="_blank">Terms & Conditions</a></label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block" id="registerBtn">Create Account</button>
+        <div id="registerSuccess" class="success-message" style="display:none;">
+          <i class="fas fa-check-circle"></i> Account created successfully! Redirecting...
+        </div>
+      </form>
+
+      <div class="divider">OR</div>
+
+      <button type="button" id="googleSignUp" class="btn btn-google btn-block">
+        <i class="fab fa-google"></i> Sign Up with Google
+      </button>
+
+      <p class="auth-link">Already have an account? <a href="login.html">Sign In</a></p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>© 2025 BusServ. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
